@@ -1,0 +1,83 @@
+/* home.css */
+.sidebar-header {
+    padding: 20px;
+    background-image: linear-gradient(rgb(42, 65, 165),rgb(5, 161, 252));
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+  }
+  
+  .sidebar-nav {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-nav ul li {
+    padding: 10px 0;
+    cursor: pointer;
+    color: #555555;
+  }
+  
+  .sidebar-nav ul li:hover {
+    color: #5151E5;
+  }
+.container {
+    display: flex;
+ 
+    transition: margin-left 0.3s;
+}
+.sidebar-hide{
+    display: none;
+    flex:0;
+}
+.sidebar {
+     /* Adjust as needed */
+   flex:1;
+   height: 100vh;
+   background-color:rgb(5, 161, 252);
+   color: #252525;
+   transform: translateX(0);
+   transition: transform 0.3s ease;
+   
+    
+}
+
+
+
+.toggle-btn {
+    background: #444;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+
+.sidebar-nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.show-sidebar {
+    width: 100%;
+    flex: 1;
+
+    /* position:relative; */
+
+    overflow: hidden; /* Prevent scrolling */
+    height: 100%; /* Ensure it occupies the full viewport height */
+    /* Optionally, set width and other properties */
+}
+
+/* Media query for small devices */
+@media (max-width: 768px) {
+    .container {
+        margin-left: 0; /* Adjust as needed */
+    }
+}

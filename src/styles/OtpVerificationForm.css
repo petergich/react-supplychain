@@ -1,0 +1,79 @@
+/* Include Roboto font */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Center the form on the page */
+.otp-verification-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Style the OTP verification form */
+.otp-verification-form {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.otp-verification-form h1 {
+  margin-bottom: 1.5rem;
+  font-size: 24px;
+  color: #333;
+  font-weight: 700;
+}
+
+.otp-verification-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  color: #333;
+  text-align: center; /* Center the text */
+}
+
+.otp-verification-form input {
+  width: calc(100% - 40px);
+  padding: 0.75rem 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.otp-verification-form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Form button */
+.otp-verification-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.otp-verification-form button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

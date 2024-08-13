@@ -1,0 +1,136 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f5f7;
+  margin: 0;
+  padding: 0;
+ 
+  width:100%;
+ 
+}
+
+.dashboard-container {
+ display: flex;
+
+}
+
+.content{
+  margin-top:100px;
+  overflow-x:hidden;
+  margin-left: 20px;
+ 
+}
+
+
+
+.main-content {
+  width:100%;
+  flex: 4;
+  
+  
+
+}
+
+.main-header {
+  z-index:5;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-top:0%;
+  background-image: linear-gradient(rgb(42, 65, 165),rgb(5, 161, 252));
+  position:fixed;
+  width: 80%;
+}
+.top-text{
+  align-items: center;
+  color:#ffffff
+  
+}
+.main-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.button-container {
+  margin-bottom:20px;
+  display: flex;
+  gap: 10px; /* Adjusts spacing between buttons */
+}
+
+.add-product,
+.add-category {
+  background-color: #5151E5;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin-bottom:20px;
+}
+.add-product:hover,
+.add-category:hover {
+  background-color: #4343c3;
+}
+.inventory-table {
+  margin: 20px;
+  background-color: #ffffff;
+  padding: 15px; /* Remove padding to prevent extra space */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Make sure it takes up the full width */
+  max-height: 400px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+.inventory-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.inventory-table th,
+.inventory-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #dddddd;
+}
+.inventory-table th {
+  background-color: #f8f8f8;
+}
+.inventory-table tr:hover {
+  background-color: #f1f1f1;
+}
+.edit_button,
+.delete_button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.edit_button {
+  background-color: #5151E5;
+  color: #ffffff;
+  margin-right: 5px;
+}
+.update_button{
+  position: relative;
+  left: 20px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #4343c3;
+}
+.update_button:hover{
+  background-color: #4343c3;}
+.edit_button:hover {
+  background-color: #4343c3;
+}
+
+.delete_button {
+  background-color: red;
+  color: #ffffff;
+}
+
+.delete_button:hover {
+  background-color: darkred;
+}
