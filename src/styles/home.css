@@ -24,9 +24,7 @@ body {
 
 .main-content {
   width:100%;
-  flex: 4;
-  
-  
+  flex:4;
 
 }
 
@@ -38,7 +36,7 @@ body {
   margin-top:0%;
   background-image: linear-gradient(rgb(42, 65, 165),rgb(5, 161, 252));
   position:fixed;
-  width: 80%;
+  min-width: 100vw;
 }
 .top-text{
   align-items: center;
@@ -54,7 +52,7 @@ body {
 .button-container {
   margin-bottom:20px;
   display: flex;
-  gap: 10px; /* Adjusts spacing between buttons */
+  gap: 10px; 
 }
 
 .add-product,
@@ -75,13 +73,13 @@ body {
 .inventory-table {
   margin: 20px;
   background-color: #ffffff;
-  padding: 15px; /* Remove padding to prevent extra space */
+  padding: 15px; 
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Make sure it takes up the full width */
-  max-height: 400px; /* Adjust height as needed */
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  width: 100%; 
+  max-height: 400px; 
+  overflow-y: auto; 
+  overflow-x: auto; 
 }
 .inventory-table table {
   width: 100%;
