@@ -25,12 +25,14 @@
   color: #555555;
 }
 
-.sidebar-nav ul li:hover {
-  color: #000000 !important; 
-}
+
 
 .sidebar-nav ul li:hover a {
   color: #000000 !important; 
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  width: max-content;
 }
 
 .sidebar-nav a {
@@ -56,12 +58,12 @@
    
  
  height: 100vh;
- background-color:rgb(5, 161, 252);
+ background-color:rgb(5, 63, 252);
  color: #252525;
  transform: translateX(0);
  transition: transform 0.3s ease;
  position:fixed;
- z-index:5;
+ z-index:10;
  width:18vw;
  
   

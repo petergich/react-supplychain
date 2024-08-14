@@ -17,26 +17,29 @@ body {
   margin-top:100px;
   overflow-x:hidden;
   margin-left: 20px;
+  z-index:0;
  
 }
 
 
 
 .main-content {
-  width:100%;
-  flex:4;
+  max-width:100%;
+  min-width:100%;
+
 
 }
 
 .main-header {
-  z-index:5;
+  z-index:100;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
   margin-top:0%;
   background-image: linear-gradient(rgb(42, 65, 165),rgb(5, 161, 252));
   position:fixed;
-  min-width: 100vw;
+  padding: 30px;
+  height: 100px;
+  width: 100%;
 }
 .top-text{
   align-items: center;

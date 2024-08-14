@@ -71,7 +71,7 @@ const Rawmaterials = () => {
       <Aside
       isNavVisible={isNavVisible}
       />
-      <main className="main-content">
+     <main className={`main-content ${isNavVisible ? '' : 'sidebar-hide'}`}>
       <header className="main-header">
           <div className='d-flex'>
           <button className="toggle-btn mr-2" onClick={toggleNavbar}>
