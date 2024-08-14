@@ -204,7 +204,7 @@ const Home = () => {
                     <td>{item.name}</td>
                     <td>{item.category ? item.category.name : 'N/A'}</td>
                     <td>{item.quantity} <button className="update_button" onClick={() => toggleProduceModal(item.id)}>Produce</button></td>
-                    <td>${item.price ? item.price.toFixed(2) : 'N/A'}</td>
+                    <td>Ksh {item.price ? item.price.toFixed(2) : 'N/A'}</td>
                     <td>
                       <button className="delete_button mr-3" onClick={() => deleteInventoryItem(item.id)}>Delete</button>
                     </td>

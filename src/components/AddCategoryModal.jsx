@@ -10,10 +10,12 @@ const Modal = ({ isVisible, onClose }) => {
     e.preventDefault();
     apiService.createcategory({ name })
       .then(response => {
-        alert('Successful');
+        alert(response.data.message);
+
         
         setName(''); // Clear the input field
         onClose(); // Optionally close the modal
+        window.location.reload()
       })
       .catch(error => {
         alert('Error');
