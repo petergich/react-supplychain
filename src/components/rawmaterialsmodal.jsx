@@ -14,6 +14,7 @@ const AddRawMaterialModal = ({ isVisible, onClose, onAdd }) => {
         setName(''); // Clear the input field
         setPrice(''); // Clear the input field
         onClose(); // Optionally close the modal
+        window.location.reload()
       })
       .catch(error => {
         alert(error);
