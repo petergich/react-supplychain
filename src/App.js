@@ -10,6 +10,7 @@ import Rawmaterials from './pages/rawmaterials';
 import Configuration from './pages/configuration';
 import Admin from "./pages/admin"
 import Products from './pages/products';
+import Suppliers from './pages/Suppliers';
 
 
 
@@ -28,6 +29,7 @@ function App() {
             <Route path='/configuration' element={<Configuration/>}/>
             <Route path = "/admin" element={<Admin/>}/>
             <Route path = "/products" element={<Products/>}/>
+            <Route path = "/suppliers" element={<Suppliers/>}/>
           </Routes>
         </header>
       </div>

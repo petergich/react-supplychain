@@ -104,7 +104,7 @@ const Rawmaterials = () => {
                 <tr key={index}>
                   <td>{item.name}</td>
                   <td>{item.quantity}<button className="update_button" onClick={() => toggleUpdatemodal(item.id)}> update </button></td>
-                  <td>${item.price ? item.price.toFixed(2) : 'N/A'}</td>
+                  <td>Ksh {item.price ? item.price.toFixed(2) : 'N/A'}</td>
                   <td>
                     <button className='edit_button'>Edit</button>
                     <button className="delete_button mr-3" onClick={() => Deleterawmaterials(item.id)}> Delete </button>

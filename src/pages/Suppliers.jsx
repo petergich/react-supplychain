@@ -6,9 +6,9 @@ import Aside from '../components/Aside';
 import PurchaseOrderService from '../service/PurchaseOrderService';
 
 
-const PurchaseOrders = () => {
+const Suppliers = () => {
   const [isNavVisible, setNavVisible] = useState(true);
-  const [PurchaseOrders, setPurchaseOrders] = useState([])
+  const [supplierModal, setSupplierModal] = useState(false)
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
 };
@@ -33,26 +33,15 @@ const PurchaseOrders = () => {
   //       console.error('Error checking token:', error);
   //     });
   // }, [navigate]);
-
-  useEffect (() =>{
-    const getPurchaseOrders = async () => {
-      try{
-      const response = await PurchaseOrderService.getAllPurchaseOrders()
-      
-      setPurchaseOrders(response)
-      console.log(response)
-      
-    }catch(error){
-      console.log(error)
-    }
-    };
-    getPurchaseOrders()
-
-  },[])
-  const completePurchaseOrder = async() =>{
-    
+  const showSupplierModal = () =>{
+    setSupplierModal(true)
   }
 
+  useEffect (() =>{
+    
+
+  },[])
+  
   return (
     <div className="dashboard-container">
        <Aside
@@ -64,40 +53,32 @@ const PurchaseOrders = () => {
           <button className="toggle-btn mr-2" onClick={toggleNavbar}>
           <i style={{color:"aqua"}}className="fa-solid fa-bars"></i>
           </button>
-          <h1 className="top-text"><i className="fas fa-home"></i>  Purchase Orders</h1>
+          <h1 className="top-text"><i className="fas fa-warehouse"></i>  Suppliers</h1>
           </div>
           <h1 className="top-text">Username</h1>
 
         </header>
         <div className='content'>
         <div className="header-buttons">
-            <button className="add-button mr-3">
-              New Purchase Order
+            <button className="btn btn-secondary" onClick={showSupplierModal}>
+              Add New
             </button>
           </div>
 
         <section className="inventory-table">
-          <          table>
+          <table>
             <thead>
               <tr style={{color:"brown"}}>
-                <th>PO Number</th>
-                <th>Supplier</th>
-                <th>Date</th>
-                <th>Status</th>
+                <th>Supplier Name</th>
+                <th>Supplier Location</th>
+                <th>Supplier Phone</th>
+                <th>Update</th>
                 <th><i className='fas fa-trash'></i></th>
                 
               </tr>
             </thead>
             <tbody>
-              {PurchaseOrders.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.poNumber}</td>
-                  <td>{item.supplier.name ? item.supplier.name : 'N/A'}</td>
-                  <td>{item.date}</td>
-                  <td>{item.delivered ? <button disabled className='btn btn-success'>Delivered</button>: <button className="btn btn-warning">Complete</button>}</td>
-                  <td><button className='btn btn-danger'>delete</button></td>
-                </tr>
-              ))}
+             
             </tbody>
           </table>
         </section>
@@ -107,4 +88,4 @@ const PurchaseOrders = () => {
   );
 };
 
-export default PurchaseOrders;
+export default Suppliers;
