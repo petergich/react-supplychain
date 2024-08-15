@@ -38,7 +38,7 @@ const Customer = () => {
   };
 
   const toggleCustomerUpdateModal = (item) => {
-    setSelectedCustomer(item);
+    // setSelectedCustomer(item);
     setUpdateVisible(!isUpdateVisible);
   };
 
