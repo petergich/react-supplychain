@@ -21,13 +21,9 @@ const Aside = ({isNavVisible}) => {
                         <li><Link to="/products">Products</Link></li>
                         <li><Link to="/rawmaterials">Raw Materials</Link></li>
                         <li><Link to="#">Categories</Link></li>
-<<<<<<< HEAD
-                        <li><Link to="#">Suppliers</Link></li>
                         <li><Link to="/customers">Customers</Link></li>
-=======
                         <li><Link to="/suppliers">Suppliers</Link></li>
                         <li><Link to="#">Customers</Link></li>
->>>>>>> 19b74414802742f528747ca9be20bcfb23b20f75
                         <li><Link to="/PurchaseOrders">Purchase Orders</Link></li>
                         <li><Link to="/admin">Admin</Link></li>
                     </ul>

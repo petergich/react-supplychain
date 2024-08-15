@@ -11,6 +11,7 @@ import Configuration from './pages/configuration';
 import Admin from "./pages/admin"
 import Products from './pages/products';
 import Suppliers from './pages/Suppliers';
+import Customers from './pages/customers';
 
 
 
@@ -30,6 +31,8 @@ function App() {
             <Route path = "/admin" element={<Admin/>}/>
             <Route path = "/products" element={<Products/>}/>
             <Route path = "/suppliers" element={<Suppliers/>}/>
+            <Route path = "/customers" element={<Customers/>}/>
+            
           </Routes>
         </header>
       </div>
