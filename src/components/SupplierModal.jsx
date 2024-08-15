@@ -5,9 +5,8 @@ import "../styles/modal.css"
 
 const SupplierModal = ({onClose,isVisible}) => {
   const [name, setName] = useState('');
-  // const [categories, setcategories] = useState('');
-  const [category, setCategory]= useState([])
-  const [price, setPrice] = useState('')
+  const [phone, setPhone] = useState('')
+ 
   
   const handleSave = () => {
    
@@ -26,7 +25,9 @@ const SupplierModal = ({onClose,isVisible}) => {
     onClose();
   };
 
- 
+ if(!isVisible){
+    return null;
+ }
 
   return (
     <div className="modal-overlay-product">
