@@ -23,7 +23,7 @@ const Aside = ({isNavVisible}) => {
                         <li><Link to="#">Categories</Link></li>
                         <li><Link to="/customers">Customers</Link></li>
                         <li><Link to="/suppliers">Suppliers</Link></li>
-                        <li><Link to="#">Customers</Link></li>
+                        <li><Link to="#">Productions</Link></li>
                         <li><Link to="/PurchaseOrders">Purchase Orders</Link></li>
                         <li><Link to="/admin">Admin</Link></li>
                     </ul>

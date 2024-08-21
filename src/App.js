@@ -12,6 +12,7 @@ import Admin from "./pages/admin"
 import Products from './pages/products';
 import Suppliers from './pages/Suppliers';
 import Customers from './pages/customers';
+import PurchaseOrderDetails from './pages/PurchaseOrderDetails';
 
 
 
@@ -32,6 +33,9 @@ function App() {
             <Route path = "/products" element={<Products/>}/>
             <Route path = "/suppliers" element={<Suppliers/>}/>
             <Route path = "/customers" element={<Customers/>}/>
+            <Route path="/purchaseorderdetails" element={<PurchaseOrderDetails />} />
+
+            
             
           </Routes>
         </header>

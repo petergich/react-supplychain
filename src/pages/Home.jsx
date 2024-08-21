@@ -11,6 +11,7 @@ import Aside from '../components/Aside';
 import ProduceModal from '../components/ProduceModal';
 
 
+
 const Home = () => {
   const navigate = useNavigate();
   const [inventory, setInventory] = useState([]);
