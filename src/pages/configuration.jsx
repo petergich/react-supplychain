@@ -155,8 +155,7 @@ const Configuration = () => {
                     <input
                       type="number"
                       className="form-control"
-                      value={product.quantity?product.quantity:"Loading..."}
-                      placeholder="Stock"
+                      value={product?product.quantity:"Loading..."}
                       disabled
                       aria-label="Stock"
                       aria-describedby="basic-addon1"

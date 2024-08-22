@@ -1,31 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import apiService from '../service/apiService';
-import '../styles/modal.css'
 
-const SupplierModal = ({ isVisible, onClose, onSupplierAdded }) => {
+const UpdateSupplierModal = ({ isVisible, onClose, supplier }) => {
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [phone, setPhone] = useState('');
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    if (supplier) {
+      setName(supplier.name);
+      setLocation(supplier.location);
+      setPhone(supplier.phone);
+    }
+  }, [supplier]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try{
-      const response = await apiService.createSupplier({"name":name, "location":location, "phone":phone})
-      alert("successfull")
-      }catch(error){
-          alert(error)
-      }
-      setName('');
-      setPhone('');
-      setLocation('');
-      window.location.reload()
+    const updatedSupplier = { name, location, phone };
+
+    apiService.updateSupplier(supplier.id, updatedSupplier)
+      .then(response => {
+        onClose();
+      })
+      .catch(error => {
+        console.error('Error updating supplier:', error);
+      });
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className='modalProduct'>
+    <div className="modal">
       <form onSubmit={handleSubmit}>
         <label>
           Name:
@@ -51,13 +56,11 @@ const SupplierModal = ({ isVisible, onClose, onSupplierAdded }) => {
             onChange={(e) => setPhone(e.target.value)} 
           />
         </label>
-        <button type="submit">Add Supplier</button>
-
+        <button type="submit">Update Supplier</button>
         <button type="button" onClick={onClose}>Cancel</button>
       </form>
-      </div>
     </div>
   );
 };
 
-export default SupplierModal;
+export default UpdateSupplierModal;
