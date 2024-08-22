@@ -1,7 +1,7 @@
 import axios from 'axios';
 import UpdateCustomerModal from '../components/updatecustomerModal';
 
-const API_URL = 'http://192.168.254.39:8080'; // Adjust the URL based on your backend
+const API_URL = 'http://192.168.254.64:8080'; // Adjust the URL based on your backend
 const token = localStorage.getItem('token');
 if (!token) {
     console.log('No token found');
@@ -57,16 +57,7 @@ const apiService = {
     getAllUsers: () => axios.get(`${API_URL}/users/all`),
     updateUserStatus: (id) => axios.put(`${API_URL}/users/${id}`),
     deleteUser:(id) => axios.delete(`${API_URL}/users/${id}`),
-    getPurchaseOrderById: (id) => axios.get(`${API_URL}/purchaseorders${id}`)
-
-
-
-
-
-
-
-
-
+    getPurchaseOrderById: (id) => axios.get(`${API_URL}/purchaseorder/${id}`)
 }
 
 export default apiService;
