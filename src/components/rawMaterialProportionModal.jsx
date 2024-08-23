@@ -41,7 +41,7 @@ const RawMaterialProportionModal = ({isVisible,onClose,item}) =>{
             </h2>
             <div class="form-group">
                 <label for="exampleInputEmail1">Proportion</label>
-                <input type="number" step="0.01" min="0"  className="form-control"onChange={(e) =>setProportion(e.target.value)}placeholder="Enter quantity.."/>
+                <input type="number" step="0.01" min="0"  className="form-control"onChange={(e) =>setProportion(e.target.value)}placeholder="Enter proportion."/>
                 <small style ={{color:"blue"}}className="form-text text-muted">Quantity used to produce one unit of a product</small>
             </div>
             <div className="form-group">

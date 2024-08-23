@@ -1,6 +1,7 @@
 import axios from 'axios';
+import UpdateCustomerModal from '../components/updatecustomerModal';
 
-const API_URL = 'http://192.168.254.245:8080'; // Adjust the URL based on your backend
+const API_URL = 'http://192.168.254.64:8080'; // Adjust the URL based on your backend
 const token = localStorage.getItem('token');
 if (!token) {
     console.log('No token found');
@@ -41,7 +42,22 @@ const apiService = {
     deleteRawMaterialProportion: (id) => axios.delete(`${API_URL}/rawmaterialproportion/${id}`),
     createProduction: (body) => axios.post(`${API_URL}/production/create`,body),
     getAllPurchaseOrders: () => axios.get(`${API_URL}/purchaseorder/all`),
-    completePurchaseOrder: (body) => axios.post(`${API_URL}/purchaseorder/update`,body)
+    completePurchaseOrder: (body) => axios.post(`${API_URL}/purchaseorder/update`,body),
+    createCustomer: (body) => axios.post(`${API_URL}/customer/create`,body),
+    getAllCustomers: () => axios.get(`${API_URL}/customer/all`),
+    updateCustomer: (body) => axios.post(`${API_URL}/customer/update`,body),
+   // deletecustomer:(id) => axios.delete(`${API_URL}/custmers/${id}`),
+    UpdateCustomerModal: (body) => axios.post(`${API_URL}/customers/updatecustomer`,body),
+    createSupplier: (body) => axios.post(`${API_URL}/suppliers/create`,body),
+    getAllSupplier: () => axios.get(`${API_URL}/suppliers/all`),
+    createPurchaseorder: (body) => axios.post(`${API_URL}/purchaseorder/create`,body),
+    getAllPurchaseOrders: () => axios.get(`${API_URL}/purchaseorder/all`),
+    setToDelivered: (body) => axios.post(`${API_URL}/purchaseorder/update`,body),
+    deletePurchaseOrder:(id) => axios.delete(`${API_URL}/purchaseorder/${id}`),
+    getAllUsers: () => axios.get(`${API_URL}/users/all`),
+    updateUserStatus: (id) => axios.put(`${API_URL}/users/${id}`),
+    deleteUser:(id) => axios.delete(`${API_URL}/users/${id}`),
+    getPurchaseOrderById: (id) => axios.get(`${API_URL}/purchaseorder/${id}`)
 }
 
 export default apiService;

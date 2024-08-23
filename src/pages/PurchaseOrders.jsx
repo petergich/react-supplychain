@@ -1,109 +1,146 @@
-import React, {useEffect, useState  } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/home.css';
 import '../styles/App.css';
-import { Link } from 'react-router-dom'; 
 import Aside from '../components/Aside';
-import PurchaseOrderService from '../service/PurchaseOrderService';
-
+import PurchaseOrderModal from '../components/newpurchaseorder';
+import apiService from '../service/apiService';
+import { Link } from 'react-router-dom';
 
 const PurchaseOrders = () => {
+  const navigate = useNavigate();
+  const [purchaseOrders, setPurchaseOrders] = useState([]);
+  const [isPurchaseOrderModalVisible, setPurchaseOrderModalVisible] = useState(false);
   const [isNavVisible, setNavVisible] = useState(true);
-  const [PurchaseOrders, setPurchaseOrders] = useState([])
+
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
-};
+  };
 
-  // Check token when the component mounts
-  // useEffect(() => {
-  //   apiService.checktoken(localStorage.getItem('token'))
-  //     .then(response => {
-  //       if (response.data.message !== 'valid') {
-  //         navigate('/login');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       navigate('/login');
-  //       if (error.response) {
-  //         alert(error.response.data.message);
-  //       } else if (error.request) {
-  //         alert('No response received from the server.');
-  //       } else {
-  //         alert(`Error: ${error.message}`);
-  //       }
-  //       console.error('Error checking token:', error);
-  //     });
-  // }, [navigate]);
+  const showPurchaseOrderModal = () => {
+    setPurchaseOrderModalVisible(true);
+  };
 
-  useEffect (() =>{
-    const getPurchaseOrders = async () => {
-      try{
-      const response = await PurchaseOrderService.getAllPurchaseOrders()
-      
-      setPurchaseOrders(response)
-      console.log(response)
-      
-    }catch(error){
-      console.log(error)
+  const hidePurchaseOrderModal = () => {
+    setPurchaseOrderModalVisible(false);
+  };
+
+  const getPurchaseOrders = async () => {
+    try {
+      const response = await apiService.getAllPurchaseOrders();
+      setPurchaseOrders(response.data);
+      console.log(response.data);
+    } catch (error) {
+      alert(error.message);
     }
-    };
-    getPurchaseOrders()
+  };
 
-  },[])
-  const completePurchaseOrder = async() =>{
-    
-  }
+  const deletePurchaseOrder = (id) => {
+    apiService.deletePurchaseOrder(id)
+      .then(response => {
+        setPurchaseOrders(purchaseOrders.filter(item => item.id !== id));
+      })
+      .catch(error => {
+        alert(error);
+      });
+  };
+
+  const handleSetToDelivered = async (id) => {
+    try {
+      await apiService.setToDelivered({'id':id,'delivered':true});
+      window.location.reload()
+      ;
+    } catch (error) {
+      alert(`Error updating purchase order to delivered: ${error.message}`);
+    }
+  };
+  const selectProduct = (id) => {
+    navigate(`/purchaseorderdetails?po=`+encodeURIComponent(id));
+  };
+  
+
+  useEffect(() => {
+    getPurchaseOrders();
+  }, []);
 
   return (
     <div className="dashboard-container">
-       <Aside
-      isNavVisible={isNavVisible}
-      />
+      <Aside isNavVisible={isNavVisible} />
       <main className="main-content">
-      <header className="main-header">
-          <div className='d-flex'>
-          <button className="toggle-btn mr-2" onClick={toggleNavbar}>
-          <i style={{color:"aqua"}}className="fa-solid fa-bars"></i>
-          </button>
-          <h1 className="top-text"><i className="fas fa-home"></i>  Purchase Orders</h1>
+        <header className="main-header">
+          <div className="d-flex">
+            <button className="toggle-btn mr-2" onClick={toggleNavbar}>
+              <i style={{ color: "aqua" }} className="fa-solid fa-bars"></i>
+            </button>
+            <h1 className="top-text"><i className="fas fa-receipt"></i> Purchase Orders</h1>
           </div>
           <h1 className="top-text">Username</h1>
-
         </header>
-        <div className='content'>
-        <div className="header-buttons">
-            <button className="add-button mr-3">
+        <div className="content">
+          <div className="header-buttons">
+            <button className="btn btn-secondary" onClick={showPurchaseOrderModal}>
               New Purchase Order
             </button>
           </div>
 
-        <section className="inventory-table">
-          <          table>
-            <thead>
-              <tr style={{color:"brown"}}>
-                <th>PO Number</th>
-                <th>Supplier</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th><i className='fas fa-trash'></i></th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              {PurchaseOrders.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.poNumber}</td>
-                  <td>{item.supplier.name ? item.supplier.name : 'N/A'}</td>
-                  <td>{item.date}</td>
-                  <td>{item.delivered ? <button disabled className='btn btn-success'>Delivered</button>: <button className="btn btn-warning">Complete</button>}</td>
-                  <td><button className='btn btn-danger'>delete</button></td>
+          <section className="inventory-table">
+            <table>
+              <thead>
+                <tr style={{ color: "brown" }}>
+                  <th>PO Number</th>
+                  <th>Supplier</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Update</th>
+                  <th><i className="fas fa-trash"></i></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
+              </thead>
+              <tbody>
+                {purchaseOrders.map((item, index) => (
+                  <tr key={index}>
+                    <td> <p onClick={() => selectProduct(item.id)}style={{ cursor: 'pointer' }}>{item.poNumber}</p>
+</td>                    <td>{item.supplier.name ? item.supplier.name : 'N/A'}</td>
+                    <td>{item.date}</td>
+                    <td>
+                      {item.delivered ? 'Delivered' : 
+                        <button 
+                          className="btn btn-success" 
+                          onClick={() => handleSetToDelivered(item.id)}
+                        >
+                          Set to Delivered
+                        </button>
+                      }
+                    </td>
+                    <td>
+                      <button 
+                        className="update_button" 
+                        //onClick={() => togglePurchaseOrderUpdateModal(item)}
+                      >
+                        Update
+                      </button>
+                    </td>
+                    <td>
+                      <button 
+                        className="delete_button mr-3" 
+                        onClick={() => deletePurchaseOrder(item.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
         </div>
       </main>
-     </div> 
+
+      <PurchaseOrderModal 
+        isVisible={isPurchaseOrderModalVisible} 
+        onClose={hidePurchaseOrderModal} 
+        onSave={(newOrder) => setPurchaseOrders([...purchaseOrders, newOrder])}
+      />
+    </div> 
   );
 };
 

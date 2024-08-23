@@ -7,12 +7,12 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('ROLE_MANAGER'); 
+  //const [role, setRole] = useState('ROLE_MANAGER'); 
   const navigate = useNavigate();
   
   const handleCreateUser = (event) => {
     event.preventDefault();
-    const user = { username, email, password, role };
+    const user = { username, email, password};
     
     
     apiService.createUser(user)
@@ -58,12 +58,7 @@ const RegistrationForm = () => {
         onChange={(e) => setPassword(e.target.value)} 
       />
        </div>
-       <div className='input-group'> 
-      <select value={role} onChange={(e) => setRole(e.target.value)}>
-        <option value="ROLE_MANAGER">   Manager</option>
-        <option value="ROLE_ADMIN">Admin</option>
-      </select>
-      </div>
+       
       <button >Create User</button>
       </form>
     </div>
