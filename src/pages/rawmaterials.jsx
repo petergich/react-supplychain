@@ -16,7 +16,7 @@ const Rawmaterials = () => {
   const [isUpdateVisible, setUpdateModal] = useState(false);
   const [isEditVisible, setEditModal] = useState(false);
   const [rawMaterial, setRawMaterial] = useState('');
-  const [isNavVisible, setNavVisible] = useState(true);
+  const [isNavVisible, setNavVisible] = useState(false);
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
 };
@@ -102,7 +102,10 @@ const Rawmaterials = () => {
             <tbody>
               {inventory.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.name}</td>
+                 <td>
+          <i className="fas fa-boxes" style={{ marginRight: '8px' }}></i> {/* Product logo */}
+          {item.name}
+        </td>
                   <td>{item.quantity}<button className="update_button" onClick={() => toggleUpdatemodal(item.id)}> update </button></td>
                   <td>Ksh {item.price ? item.price.toFixed(2) : 'N/A'}</td>
                   <td>

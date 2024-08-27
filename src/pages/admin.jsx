@@ -4,7 +4,7 @@ import '../styles/App.css';
 import Aside from '../components/Aside';
 import apiService from '../service/apiService'; 
 const Admin = () => {
-  const [isNavVisible, setNavVisible] = useState(true);
+  const [isNavVisible, setNavVisible] = useState(false);
   const [users, setUsers] = useState([]); // State to store the list of users
 
   const toggleNavbar = () => {
@@ -77,7 +77,7 @@ const Admin = () => {
               <tbody>
                 {users.map((user, index) => (
                   <tr key={index}>
-                    <td>{user.username}</td>
+                    <td> <i className="fas fa-user" style={{ marginRight: '8px' }}></i> {/* Product logo */}{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.accountApproved?'Verified':'Not verified'}</td>
                     <td>{user.role}</td>
