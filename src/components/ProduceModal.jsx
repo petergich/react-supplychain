@@ -4,7 +4,7 @@ import ProductionService from "../service/ProductionService"
 
 const ProduceModal = ({ item, isVisible, onClose }) => {
     const [quantity, setQuantity] = useState("");
-    const [status, setStatus] = useState(true);
+    const [status, setStatus] = useState("false");
     const [date, setDate] = useState("");
 
     useEffect(() => {
@@ -19,12 +19,13 @@ const ProduceModal = ({ item, isVisible, onClose }) => {
     const handleSave = async (e) => {
         e.preventDefault();
         // Handle the save action here
-       const response = await ProductionService.CreateProduction({"productId":item,"quantity":quantity,"status":status,"date":date})
-       try{
-        alert(response.data.message)
-       }catch(error){
-        alert(error)
-       }
+        try {
+            const response = await ProductionService.CreateProduction({"productId": item, "quantity": quantity, "status": status?"true":"false", "date": date});
+            console.log(response.data);
+            alert(response.data.message);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     if (!isVisible) {
@@ -72,9 +73,9 @@ const ProduceModal = ({ item, isVisible, onClose }) => {
                             type="radio"
                             id="processing"
                             name="status"
-                            value={false}
-                            onChange={() => setStatus(false)}
-                            checked={!status}
+                            value="false"
+                            checked={status === "false"}
+                            onChange={() => setStatus("false")}
                         />
                         <label className="form-check-label" htmlFor="processing">
                             Processing
@@ -86,9 +87,9 @@ const ProduceModal = ({ item, isVisible, onClose }) => {
                             type="radio"
                             id="finished"
                             name="status"
-                            value={true}
-                            onChange={() => setStatus(true)}
-                            checked={status}
+                            value="true"
+                            checked={status === "true"}
+                            onChange={() => setStatus("true")}
                         />
                         <label className="form-check-label" htmlFor="finished">
                             Finished

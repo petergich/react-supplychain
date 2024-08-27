@@ -14,7 +14,7 @@ const Suppliers = () => {
   const [isSupplierModalVisible, setSupplierModalVisible] = useState(false);
   const [isUpdateVisible, setUpdateVisible] = useState(false);
   const [selectedSupplier, setSelectedSupplier] = useState(null);
-  const [isNavVisible, setNavVisible] = useState(true);
+  const [isNavVisible, setNavVisible] = useState(false);
 
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
@@ -94,7 +94,7 @@ const getPurchaseOrders= (supplier) =>{
               <tbody>
                 {supplier.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.name}</td>
+                    <td> <i className="fas fa-truck" style={{ marginRight: '8px' }}></i> {/* Product logo */}{item.name}</td>
                     <td>{item.location}</td>
                     <td>{item.phone}</td>
                     <td> {getPurchaseOrders(item)} </td>

@@ -18,7 +18,7 @@ const Configuration = () => {
   const [price, setPrice] = useState('');
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [newProportionModal, setNewProportionModal] = useState(false)
-  const [isNavVisible, setNavVisible] = useState(true);
+  const [isNavVisible, setNavVisible] = useState(false);
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
 };

@@ -4,62 +4,68 @@ import apiService from "../service/apiService"; // Adjust the path as necessary
 import Aside from "../components/Aside";
 import AddRawMaterialModal from "../components/AddRawMaterialModal"; // Adjust the path as necessary
 
-const ProductsOrderDetails = () => {
+const PurchaseOrderDetails = () => {
   const navigate = useNavigate();
-  const [purchaseOrder, setPurchaseOrder] = useState({});
   const [rawMaterials, setRawMaterials] = useState([]);
-  const [isNavVisible, setNavVisible] = useState(true);
   const [showAddMaterialModal, setShowAddMaterialModal] = useState(false);
+  const [purchaseOrder, setPurchaseOrder] = useState({});
+  const [isNavVisible, setNavVisible] = useState(false);
+  const [poID, setpoId]= useState(null);
 
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
-  };
-
-  const handleAddMaterial = (material) => {
-    // Update the rawMaterials state with the new material
-    setRawMaterials([...rawMaterials, material]);
   };
 
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const poId = urlParams.get("po");
-    
-    const fetchPurchaseOrder = async (poId) => {
-      const response = await apiService.getPurchaseOrderById(poId);
-      setPurchaseOrder(response.data);
-    };
+    setpoId(poId);
 
-    const fetchRawMaterials = async () => {
-      const response = await apiService.getRawMaterials();
-      setRawMaterials(response.data);
-    };
+    const fetchRawMaterials = async (id) => {
+      try {
+        
+        const response = await apiService.getRawMaterialOrdersByPo(id);
+        
+        
+        console.log(response.data);
+        setRawMaterials(response.data)
+      }
+      catch(error){
+        console.log(error)
 
-    fetchPurchaseOrder(poId);
-    fetchRawMaterials();
+      }
+    }
+    const fetchPurchaseOrder = async () => {
+      try {
+        const response = await apiService.getPurchaseOrderById(poId);
+        setPurchaseOrder(response.data);
+      } catch (error) {
+        console.error("Error fetching purchase order:", error);
+      }
+    };
+    fetchRawMaterials(poId)
+    fetchPurchaseOrder();
   }, []);
 
-  const deletePurchaseOrder = (id) => {
-    apiService
-      .deletePurchaseOrder(id)
-      .then(() => {})
-      .catch((error) => {
-        alert(error);
-      });
+  const deletePurchaseOrder = async (id) => {
+    try {
+      await apiService.deletePurchaseOrder(id);
+    } catch (error) {
+      alert(error);
+    }
   };
+  
 
   const handleSetToDelivered = async (id) => {
     try {
-      await apiService.setToDelivered({ id: id, delivered: true });
+      await apiService.setToDelivered({ id, delivered: true });
       window.location.reload();
     } catch (error) {
       alert(`Error updating purchase order to delivered: ${error.message}`);
     }
   };
-
-  const selectProduct = (id) => {
-    navigate(`/purchaseorderdetails?po=${encodeURIComponent(id)}`);
-  };
+  
 
   return (
     <div className="dashboard-container">
@@ -94,14 +100,11 @@ const ProductsOrderDetails = () => {
               <tbody>
                 <tr>
                   <td>
-                    <p
-                      onClick={() => selectProduct(purchaseOrder.id)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      {purchaseOrder?.poNumber || "Loading.."}
+                    <p style={{ cursor: "pointer" }}>
+                      {purchaseOrder?.poNumber || "Loading..."}
                     </p>
                   </td>
-                  <td>{purchaseOrder?.supplier?.name || "Loading.."}</td>
+                  <td>{purchaseOrder?.supplier?.name || "Loading..."}</td>
                   <td>{purchaseOrder.date}</td>
                   <td>
                     {purchaseOrder.delivered ? (
@@ -118,7 +121,7 @@ const ProductsOrderDetails = () => {
                   <td>
                     <button
                       className="update_button"
-                      //onClick={() => togglePurchaseOrderUpdateModal(item)}
+                      // onClick={() => togglePurchaseOrderUpdateModal(item)}
                     >
                       Update
                     </button>
@@ -155,14 +158,14 @@ const ProductsOrderDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* {rawMaterials.map((material, index) => (
-                  <tr key={index}>
-                    <td>{material.name}</td>
+              {rawMaterials.map((material, index) => (
+                  <tr>
+                    <td>{material.rawMaterial.name}</td>
                     <td>{material.price}</td>
-                    <td>{material.quantityPurchased}</td>
-                    <td>{material.quantityInStore}</td>
+                    <td>{material.quantity}</td>
+                    <td>{material.rawMaterial.quantity}</td>
                   </tr>
-                ))} */}
+                ))}
               </tbody>
             </table>
           </div>
@@ -171,12 +174,11 @@ const ProductsOrderDetails = () => {
 
       <AddRawMaterialModal
         isOpen={showAddMaterialModal}
-        onClose={() => setShowAddMaterialModal(false)}
-        rawMaterials={rawMaterials}
-        onSave={handleAddMaterial}
+        onClose={() => setShowAddMaterialModal(false)} 
+        poID={poID}
       />
     </div>
   );
 };
 
-export default ProductsOrderDetails;
+export default PurchaseOrderDetails;
