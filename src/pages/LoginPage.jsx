@@ -57,6 +57,7 @@ const LoginPage = () => {
         <button type="submit">Login</button>
         <div className="form-footer">
           <p>Don't have an account? <a href="/register">Register here</a></p>
+          <p>Frogot your password? <a href="/emailverification" >Click here to reset </a></p>
         </div>
       </form>
     </div>

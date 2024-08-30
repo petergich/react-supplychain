@@ -61,6 +61,8 @@ const apiService = {
     getRawMaterialOrdersByPo: (id) => axios.get(`${API_URL}/rawmaterialorder/getbypurchaseorder/${id}`),
     createRawMaterialOrder:(body) => axios.post(`${API_URL}/rawmaterialorder/create`,body),
     getProductions: () => axios.get(`${API_URL}/productions/all`),
+    ForgotPassword:(email) => axios.post(`${API_URL}/users/forgetpassword`, email),
+    confirmResetPassword:(body)=> axios.post(`${API_URL}/users/resetpassword`, body)
     
     
 

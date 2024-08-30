@@ -62,6 +62,7 @@ const Productions = () => {
               </thead>
               <tbody>
                 {productions.map((item) => (
+                
                   <tr key={item.id}>
                     <td>{item.productName}</td>
                     <td>{item.quantity}</td>
