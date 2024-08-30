@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import apiService from '../service/apiService';
 import '../styles/PasswordReset.css';
 
+
 const ConfirmPasswordPage = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,14 +13,18 @@ const ConfirmPasswordPage = () => {
   const email = location.state?.email || 'user@example.com'; // Replace with actual email logic
   const [token, setToken] = useState('')
   // Extract token from the URL
-  const queryParams = new URLSearchParams(location.search);
-  useEffect(() =>{const tokenparam = queryParams.get('token');
+  
+  useEffect(() =>{
+    const queryParams = new URLSearchParams(location.search);
+    const tokenparam = queryParams.get('token');
   if(tokenparam){
     setToken(tokenparam)
   }else{
     alert("Invalid link")
+    navigate("/emailverification")
+    
   }
-},[])
+},[location.search])
 
   const handlePasswordReset = (e) => {
     e.preventDefault();
@@ -32,16 +37,17 @@ const ConfirmPasswordPage = () => {
     // Make sure the token is included in the request
     apiService.confirmResetPassword({ "password":newPassword, "token":token })
       .then(response => {
-        if (response.data.message === "Password reset successful") {
+
+        if (response.data === "Password reset successful") {
           alert("Your password has been reset successfully.");
-          navigate("/login"); // Navigate back to login after successful password reset
+          navigate("/"); // Navigate back to login after successful password reset
         } else {
-          alert(response.data.message);
+          console.log(response.data);
         }
       })
       .catch(error => {
         if (error.response) {
-          alert(error.response.data.message);
+          console.log(error.response);
         } else if (error.request) {
           alert('No response received from the server.');
         } else {

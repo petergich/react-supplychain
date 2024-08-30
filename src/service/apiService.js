@@ -1,5 +1,4 @@
 import axios from 'axios';
-import UpdateCustomerModal from '../components/updatecustomerModal';
 
 const API_URL = 'http://192.168.254.100:8080'; // Adjust the URL based on your backend
 const token = localStorage.getItem('token');
@@ -51,12 +50,12 @@ const apiService = {
     createSupplier: (body) => axios.post(`${API_URL}/suppliers/create`,body),
     getAllSupplier: () => axios.get(`${API_URL}/suppliers/all`),
     createPurchaseorder: (body) => axios.post(`${API_URL}/purchaseorder/create`,body),
-    getAllPurchaseOrders: () => axios.get(`${API_URL}/purchaseorder/all`),
+    
     setToDelivered: (body) => axios.post(`${API_URL}/purchaseorder/update`,body),
     deletePurchaseOrder:(id) => axios.delete(`${API_URL}/purchaseorder/${id}`),
-    getAllUsers: () => axios.get(`${API_URL}/users/all`),
+    
     updateUserStatus: (id) => axios.put(`${API_URL}/users/${id}`),
-    deleteUser:(id) => axios.delete(`${API_URL}/users/${id}`),
+   
     getPurchaseOrderById: (id) => axios.get(`${API_URL}/purchaseorder/${id}`),
     getRawMaterialOrdersByPo: (id) => axios.get(`${API_URL}/rawmaterialorder/getbypurchaseorder/${id}`),
     createRawMaterialOrder:(body) => axios.post(`${API_URL}/rawmaterialorder/create`,body),

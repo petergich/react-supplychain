@@ -9,13 +9,12 @@ const ResetPasswordPage = () => {
 
   const handleReset = (e) => {
     e.preventDefault();
-    alert(email)
     apiService.ForgotPassword({"email":email})
       .then(response => { 
         console.log(response)
         if(response.data === "Email sent"){
           alert("Please check your email for password reset instructions.");
-          navigate("/PasswordReset"); // Navigate back to login after successful reset
+           // Navigate back to login after successful reset
         } else {
           //alert(response.data);
         }
