@@ -13,7 +13,7 @@ const Customer = () => {
   const [isCustomerModalVisible, setCustomerModalVisible] = useState(false);
   const [isUpdateVisible, setUpdateVisible] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const [isNavVisible, setNavVisible] = useState(true);
+  const [isNavVisible, setNavVisible] = useState(false);
 
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
@@ -79,7 +79,7 @@ const Customer = () => {
               <tbody>
                 {customers.map((customer, index) => (
                   <tr key={index}>
-                    <td>{customer.name}</td>
+                    <td> <i className="fas fa-users" style={{ marginRight: '8px' }}></i> {/* Product logo */}{customer.name}</td>
                     <td>{customer.phone}</td>
                     <td>
                       <button onClick={() => toggleCustomerUpdateModal(customer)}>

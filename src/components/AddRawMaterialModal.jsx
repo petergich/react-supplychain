@@ -1,60 +1,99 @@
-import React, { useState } from 'react';
-import Modal from 'react-modal';
-import '../styles/modal.css';
+import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
+import apiService from "../service/apiService"; 
 
-// Ensure that Modal.setAppElement is called for accessibility
-Modal.setAppElement('#root');
+const AddRawMaterialModal = ({ isOpen, onClose, poID }) => {
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [rawMaterials, setRawMaterials] = useState([]);
 
-const AddRawMaterialModal = ({ isOpen, onClose, rawMaterials, onSave }) => {
-  const [selectedMaterial, setSelectedMaterial] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [price, setPrice] = useState('');
+  useEffect(() => {
+    const fetchRawMaterials = async () => {
+      try {
+        const response = await apiService.getRawMaterials(); 
+        setRawMaterials(response.data.rawmaterials || []); 
+      } catch (error) {
+        console.error("Error fetching raw materials:", error);
+      }
+    };
+    fetchRawMaterials();
+  }, []);
 
   const handleSave = () => {
-    if (selectedMaterial && quantity && price) {
-      onSave({ id: selectedMaterial, quantity, price });
-      onClose();
-    } else {
-      alert('Please fill all fields');
-    }
+    apiService.createRawMaterialOrder({
+      'rawMaterialId': selectedMaterial, 
+      'purchaseOrderId': poID, 
+      'price': price, 
+      'quantity': quantity
+    })
+    .then(response => {
+      window.location.reload();
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    onClose();
   };
 
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      contentLabel="Add Raw Material"
-      className="modal"
-      overlayClassName="modal-overlay"
+      className="modalProduct"
+      overlayClassName="modal-overlay-product"
     >
       <h2>Add Raw Material</h2>
-      <div className="modal-body">
-        <select
-          value={selectedMaterial}
-          onChange={(e) => setSelectedMaterial(e.target.value)}
-        >
-          <option value="" disabled>Select Raw Material</option>
-          {/* {rawMaterials.map((material) => (
-            <option key={material.id} value={material.id}>
-              {material.name}
-            </option>
-          ))} */}
-        </select>
-        <input
-          type="number"
-          placeholder="Quantity"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <button onClick={handleSave}>Save</button>
-        <button onClick={onClose}>Cancel</button>
-      </div>
+      <form>
+        <div className="form-group">
+          <label htmlFor="materialSelect">Raw Material</label><br/>
+          <select
+            className="form-data"
+            id="materialSelect"
+            value={selectedMaterial}
+            onChange={(e) => setSelectedMaterial(e.target.value)}
+            required
+          >
+            <option value="" disabled>Select a material</option>
+            {rawMaterials.map((material) => (
+              <option key={material.id} value={material.id}>
+                {material.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="priceInput">Price</label>
+          <input
+            type="number"
+            id="priceInput"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="quantityInput">Quantity</label>
+          <input
+            type="number"
+            id="quantityInput"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" onClick={onClose}>
+            Cancel
+          </button>
+          <button type="button" className="btn btn-primary" onClick={handleSave}>
+            Save
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 };

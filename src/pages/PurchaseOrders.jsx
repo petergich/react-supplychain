@@ -11,7 +11,7 @@ const PurchaseOrders = () => {
   const navigate = useNavigate();
   const [purchaseOrders, setPurchaseOrders] = useState([]);
   const [isPurchaseOrderModalVisible, setPurchaseOrderModalVisible] = useState(false);
-  const [isNavVisible, setNavVisible] = useState(true);
+  const [isNavVisible, setNavVisible] = useState(false);
 
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
@@ -98,7 +98,7 @@ const PurchaseOrders = () => {
               <tbody>
                 {purchaseOrders.map((item, index) => (
                   <tr key={index}>
-                    <td> <p onClick={() => selectProduct(item.id)}style={{ cursor: 'pointer' }}>{item.poNumber}</p>
+                    <td> <p onClick={() => selectProduct(item.id)}style={{ cursor: 'pointer' }}> <i className="fas fa-receipt" style={{ marginRight: '8px' }}></i> {/* Product logo */} {item.poNumber}</p>
 </td>                    <td>{item.supplier.name ? item.supplier.name : 'N/A'}</td>
                     <td>{item.date}</td>
                     <td>

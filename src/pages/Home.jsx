@@ -22,7 +22,7 @@ const Home = () => {
   const [isEditVisible, setEditModal] = useState(false);
   const [isProduceModalVisible, setIsProduceModalVisible] = useState(false)
   const [produceItem,setProduceItem] = useState(null)
-  const [isNavVisible, setNavVisible] = useState(true);
+  const [isNavVisible, setNavVisible] = useState(false);
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
 };
@@ -195,25 +195,21 @@ const Home = () => {
                   <th>Category</th>
                   <th>Stock</th>
                   <th>Price</th>
-                  <th>Actions</th>
-                  <th>Configuration</th>
                 </tr>
               </thead>
               <tbody>
                 {inventory.map((item) => (
                   <tr key={item.id}>
-                    <td>{item.name}</td>
+                    <td>
+          <i className="fas fa-shopping-cart" style={{ marginRight: '8px' }}></i> {/* Product logo */}
+          {item.name}
+        </td>
                     <td>{item.category ? item.category.name : 'N/A'}</td>
-                    <td>{item.quantity} <button className="update_button" onClick={() => toggleProduceModal(item.id)}>Produce</button></td>
                     <td>Ksh {item.price ? item.price.toFixed(2) : 'N/A'}</td>
                     <td>
                       <button className="delete_button mr-3" onClick={() => deleteInventoryItem(item.id)}>Delete</button>
                     </td>
-                    <td>
-                      <button className="add-button" onClick={() => selectProduct(item.id)}>
-                        Configuration
-                      </button>
-                    </td>
+                    
                   </tr>
                 ))}
               </tbody>
