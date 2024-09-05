@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import "../styles/modal.css";
 import ProductionService from "../service/ProductionService"
 

@@ -43,7 +43,8 @@ const getPurchaseOrders= (supplier) =>{
   const deleteSupplier = (id) => {
     apiService.deleteSupplier(id)
       .then(response => {
-        setInventory(inventory.filter(item => item.id !== id));
+        console.log(response)
+        window.location.reload()
       })
       .catch(error => {
         alert(error);

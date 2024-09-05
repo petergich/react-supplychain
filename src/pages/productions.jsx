@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../styles/home.css';
 import apiService from '../service/apiService';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../components/Modal'; 
 import '../styles/App.css';
 import Aside from '../components/Aside';
 
@@ -20,7 +19,7 @@ const Productions = () => {
   const fetchProductions = async () => {
     try {
       const response = await apiService.getProductions();
-      setProductions(response.data.productions);
+      setProductions(response.data);
     } catch (error) {
       console.error('Error fetching productions:', error);
     }
@@ -51,9 +50,11 @@ const Productions = () => {
           <section className="inventory-table">
             <div className="header-buttons">
             </div>
+            <div className="table-responsive">
             <table>
               <thead>
                 <tr>
+                  <th>Production Id</th>
                   <th>Product</th>
                   <th>Quantity</th>
                   <th>Status</th>
@@ -64,14 +65,17 @@ const Productions = () => {
                 {productions.map((item) => (
                 
                   <tr key={item.id}>
-                    <td>{item.productName}</td>
-                    <td>{item.quantity}</td>
-                    <td>{item.status}</td>
+                    <td><i class="fas fa-industry"></i>&nbsp;
+                    {item.id?item.id:"loading.."}</td>
+                    <td>{item.product?item.product.name:"loading.."}</td>
+                    <td>{item.finalProductQuantity?item.finalProductQuantity:"loading.."}</td>
+                    <td>{item.finished?"completed":"Not completed"}</td>
                     <td>{new Date(item.date).toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            </div>
           </section>
         </div>
       </main>

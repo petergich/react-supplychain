@@ -83,6 +83,7 @@ const PurchaseOrderDetails = () => {
           <h1 className="top-text">Username</h1>
         </header>
         <div className="content">
+          <h6>Purchase Order Details for: <i className="fas fa-receipt" style={{ marginRight: '8px' }}> </i></h6>
           <div className="card m-4 p-4">
             <table>
               <thead>
@@ -148,7 +149,7 @@ const PurchaseOrderDetails = () => {
                 Add Raw Material
               </button>
             </div>
-            <table className="table table-responsive">
+            <table className="table table">
               <thead className="thead-dark">
                 <tr style={{ color: "brown" }}>
                   <th>Raw Material</th>

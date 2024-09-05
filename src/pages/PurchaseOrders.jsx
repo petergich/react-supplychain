@@ -47,17 +47,17 @@ const PurchaseOrders = () => {
 
   const handleSetToDelivered = async (id) => {
     try {
-      await apiService.setToDelivered({'id':id,'delivered':true});
+      await apiService.setToDelivered({ 'id': id, 'delivered': true });
       window.location.reload()
-      ;
+        ;
     } catch (error) {
       alert(`Error updating purchase order to delivered: ${error.message}`);
     }
   };
   const selectProduct = (id) => {
-    navigate(`/purchaseorderdetails?po=`+encodeURIComponent(id));
+    navigate(`/purchaseorderdetails?po=` + encodeURIComponent(id));
   };
-  
+
 
   useEffect(() => {
     getPurchaseOrders();
@@ -98,13 +98,14 @@ const PurchaseOrders = () => {
               <tbody>
                 {purchaseOrders.map((item, index) => (
                   <tr key={index}>
-                    <td> <p onClick={() => selectProduct(item.id)}style={{ cursor: 'pointer' }}> <i className="fas fa-receipt" style={{ marginRight: '8px' }}></i> {/* Product logo */} {item.poNumber}</p>
-</td>                    <td>{item.supplier.name ? item.supplier.name : 'N/A'}</td>
+                    <td> <p onClick={() => selectProduct(item.id)} style={{ cursor: 'pointer' }}> <i className="fas fa-receipt" style={{ marginRight: '8px' }}></i> {/* Product logo */} {item.poNumber}</p>
+                    </td>                    
+                    <td>{item.supplier.name ? item.supplier.name : 'N/A'}</td>
                     <td>{item.date}</td>
                     <td>
-                      {item.delivered ? 'Delivered' : 
-                        <button 
-                          className="btn btn-success" 
+                      {item.delivered ? 'Delivered' :
+                        <button
+                          className="btn btn-success"
                           onClick={() => handleSetToDelivered(item.id)}
                         >
                           Set to Delivered
@@ -112,16 +113,16 @@ const PurchaseOrders = () => {
                       }
                     </td>
                     <td>
-                      <button 
-                        className="update_button" 
-                        //onClick={() => togglePurchaseOrderUpdateModal(item)}
+                      <button
+                        className="update_button"
+                      //onClick={() => togglePurchaseOrderUpdateModal(item)}
                       >
                         Update
                       </button>
                     </td>
                     <td>
-                      <button 
-                        className="delete_button mr-3" 
+                      <button
+                        className="delete_button mr-3"
                         onClick={() => deletePurchaseOrder(item.id)}
                       >
                         Delete
@@ -135,12 +136,12 @@ const PurchaseOrders = () => {
         </div>
       </main>
 
-      <PurchaseOrderModal 
-        isVisible={isPurchaseOrderModalVisible} 
-        onClose={hidePurchaseOrderModal} 
+      <PurchaseOrderModal
+        isVisible={isPurchaseOrderModalVisible}
+        onClose={hidePurchaseOrderModal}
         onSave={(newOrder) => setPurchaseOrders([...purchaseOrders, newOrder])}
       />
-    </div> 
+    </div>
   );
 };
 
