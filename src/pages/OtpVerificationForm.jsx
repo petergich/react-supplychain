@@ -24,7 +24,7 @@ const OtpVerificationForm = ({ onSubmit }) => {
       .then(response => {
         alert(response.data.message);
         if(response.data.message==="Verification Successful"){
-          navigate('/login');
+          navigate('/');
         }
       })
       .catch(error => {

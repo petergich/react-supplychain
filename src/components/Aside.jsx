@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/home.css'; // Ensure this CSS file matches your styling
 import '../styles/aside.css';
-
+import logo from '../images/supplychain logo.png'
 const Aside = ({ isNavVisible }) => {
     const asideRef = useRef(null);
 
@@ -24,8 +24,9 @@ const Aside = ({ isNavVisible }) => {
             ref={asideRef}
             className={`sidebar ${!isNavVisible ? 'sidebar-hide' : ''}`}
         >
-            <div className="sidebar-header">
-                <h2>Supply Chain</h2>
+            <div className="sidebar-header d-flex">
+                <img src={logo} alt="logo" style={{width:"80px",height:"80px"}}/>
+                
             </div>
             <nav className="sidebar-nav">
                 <ul>
