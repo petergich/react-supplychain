@@ -46,7 +46,10 @@ const CustomerModal = ({ isVisible, onClose }) => {
             required 
           />
           
-          <button type="submit">Save</button>
+          <div className="d-flex">
+          <button type="button" className="btn btn-warning m-3" onClick={onClose}>Close</button>
+          <button type="submit" className="btn btn-primary m-3">Add</button>
+          </div>
         </form>
       </div>
     </div>

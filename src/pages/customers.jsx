@@ -57,7 +57,7 @@ const Customer = () => {
             </button>
             <h1 className="top-text"><i className="fas fa-users"></i> Customer</h1>
           </div>
-          <h1 className="top-text">Username</h1>
+          <h1 className="top-text"><i className="fas fa-user" style={{ marginRight: '8px' }}/>{apiService.getUsername()}</h1>
         </header>
         <div className="content">
           <div className="header-buttons">
@@ -87,7 +87,7 @@ const Customer = () => {
                       </button>
                     </td>
                     <td>
-                      <button onClick={() => {
+                      <button className="btn btn-danger" onClick={() => {
                         if (window.confirm('Are you sure you want to delete this customer?')) {
                           apiService.deleteCustomer(customer.id)
                             .then(() => getCustomers())

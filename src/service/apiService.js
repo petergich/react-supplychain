@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
-const API_URL = 'http://192.168.254.100:8080'; // Adjust the URL based on your backend
+const API_URL = 'http://192.168.254.127:8080'; // Adjust the URL based on your backend
 const token = localStorage.getItem('token');
 if (!token) {
     console.log('No token found');
@@ -13,6 +14,20 @@ if (!token) {
 //     },
 // };
 const apiService = {
+    getUsername:() => {
+        try {
+          // Decode the JWT token
+          const decodedToken = jwtDecode(token);
+      
+          console.log(decodedToken)
+          const username = decodedToken.sub; // 'sub' is often used for the subject in tokens
+      
+          return username;
+        } catch (error) {
+          console.error("Error decoding JWT:", error);
+          return "Username";
+        }
+      },
     getProductRawMaterials: (product) => {
         console.log("id: "+product)
        return  axios.get(`${API_URL}/rawmaterialproportion/getbyproduct/${product}`);
@@ -59,7 +74,7 @@ const apiService = {
     getPurchaseOrderById: (id) => axios.get(`${API_URL}/purchaseorder/${id}`),
     getRawMaterialOrdersByPo: (id) => axios.get(`${API_URL}/rawmaterialorder/getbypurchaseorder/${id}`),
     createRawMaterialOrder:(body) => axios.post(`${API_URL}/rawmaterialorder/create`,body),
-    getProductions: () => axios.get(`${API_URL}/productions/all`),
+    getProductions: () => axios.get(`${API_URL}/production/all`),
     ForgotPassword:(email) => axios.post(`${API_URL}/users/forgetpassword`, email),
     confirmResetPassword:(body)=> axios.post(`${API_URL}/users/resetpassword`, body)
     

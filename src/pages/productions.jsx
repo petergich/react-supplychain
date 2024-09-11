@@ -20,7 +20,7 @@ const Productions = () => {
   const fetchProductions = async () => {
     try {
       const response = await apiService.getProductions();
-      setProductions(response.data.productions);
+      setProductions(response.data);
     } catch (error) {
       console.error('Error fetching productions:', error);
     }
@@ -45,7 +45,7 @@ const Productions = () => {
             </button>
             <h1 className="top-text"><i className="fas fa-box"></i> Productions</h1>
           </div>
-          <h1 className="top-text">Username</h1>
+          <h1 className="top-text"><i className="fas fa-user" style={{ marginRight: '8px' }}/>{apiService.getUsername()}</h1>
         </header>
         <div className="content">
           <section className="inventory-table">
@@ -61,15 +61,16 @@ const Productions = () => {
                 </tr>
               </thead>
               <tbody>
-                {productions.map((item) => (
+                {productions?productions.map((item) => (
                 
                   <tr key={item.id}>
-                    <td>{item.productName}</td>
-                    <td>{item.quantity}</td>
-                    <td>{item.status}</td>
+                    <td><i class="fas fa-industry"></i>&nbsp;
+                    {item.name}</td>
+                    <td>{item.finalProductQuantity}</td>
+                    <td>{item.finished?"Finished":"Processing"}</td>
                     <td>{new Date(item.date).toLocaleDateString()}</td>
                   </tr>
-                ))}
+                )):"Loading."}
               </tbody>
             </table>
           </section>

@@ -79,7 +79,7 @@ const Rawmaterials = () => {
           </button>
           <h1 className="top-text"><i className="fas fa-boxes"></i>  Raw Materials</h1>
           </div>
-          <h1 className="top-text">Username</h1>
+          <h1 className="top-text"><i className="fas fa-user" style={{ marginRight: '8px' }}/>{apiService.getUsername()}</h1>
 
         </header>
         <div className = "content">

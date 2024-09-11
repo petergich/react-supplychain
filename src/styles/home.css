@@ -14,7 +14,7 @@ body {
 }
 
 .content{
-  margin-top:100px;
+  margin-top:120px;
   overflow-x:hidden;
   margin-left: 20px;
   z-index:0;
@@ -74,7 +74,7 @@ body {
   background-color: #4343c3;
 }
 .inventory-table {
-  margin: 20px;
+  margin-top: 20px;
   background-color: #ffffff;
   padding: 15px; 
   border-radius: 10px;
