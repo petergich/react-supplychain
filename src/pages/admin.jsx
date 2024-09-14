@@ -24,7 +24,7 @@ const Admin = () => {
       }
     };
 
-    fetchUsers();
+    fetchUsers();  
   }, []);
 
   const handleStatusChange = async (id) => {

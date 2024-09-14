@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/App.css';
 import Updatemodal from '../components/Updatemodal';
 import EditModal from '../components/EditModal';
-import { Link } from 'react-router-dom';
 import AddRawMaterialModal from '../components/rawmaterialsmodal'; // Import the new modal
 import Aside from '../components/Aside';
 
@@ -44,7 +43,7 @@ const Rawmaterials = () => {
     apiService.deleterawmaterials(id)
     .then(response =>{
       
-      window.location.href= window.location.href
+      window.location.reload()
     })
     .catch(error => {
       alert(error)

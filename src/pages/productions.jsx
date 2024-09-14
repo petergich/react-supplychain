@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../styles/home.css';
 import apiService from '../service/apiService';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../components/Modal'; 
 import '../styles/App.css';
 import Aside from '../components/Aside';
 
@@ -51,9 +50,11 @@ const Productions = () => {
           <section className="inventory-table">
             <div className="header-buttons">
             </div>
+            <div className="table-responsive">
             <table>
               <thead>
                 <tr>
+                  <th>Production Id</th>
                   <th>Product</th>
                   <th>Quantity</th>
                   <th>Status</th>
@@ -65,14 +66,16 @@ const Productions = () => {
                 
                   <tr key={item.id}>
                     <td><i class="fas fa-industry"></i>&nbsp;
-                    {item.name}</td>
-                    <td>{item.finalProductQuantity}</td>
-                    <td>{item.finished?"Finished":"Processing"}</td>
+                    {item.id?item.id:"loading.."}</td>
+                    <td>{item.product?item.product.name:"loading.."}</td>
+                    <td>{item.finalProductQuantity?item.finalProductQuantity:"loading.."}</td>
+                    <td>{item.finished?"completed":"Not completed"}</td>
                     <td>{new Date(item.date).toLocaleDateString()}</td>
                   </tr>
-                )):"Loading."}
+                )):"Loading.."}
               </tbody>
             </table>
+            </div>
           </section>
         </div>
       </main>

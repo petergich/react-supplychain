@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/home.css';
 import '../styles/App.css';
@@ -67,7 +67,8 @@ const Customer = () => {
           </div>
 
           <section className="inventory-table">
-            <table>
+            <div className='table-responsive'>
+            <table className='table '>
               <thead>
                 <tr style={{ color: "brown" }}>
                   <th>Customer Name</th>
@@ -101,6 +102,7 @@ const Customer = () => {
                 ))}
               </tbody>
             </table>
+            </div>
           </section>
         </div>
       </main>

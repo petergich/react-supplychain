@@ -11,7 +11,6 @@ import Aside from '../components/Aside';
 import ProduceModal from '../components/ProduceModal';
 
 
-
 const Home = () => {
   const navigate = useNavigate();
   const [inventory, setInventory] = useState([]);
@@ -23,6 +22,7 @@ const Home = () => {
   const [isProduceModalVisible, setIsProduceModalVisible] = useState(false)
   const [produceItem,setProduceItem] = useState(null)
   const [isNavVisible, setNavVisible] = useState(false);
+  const [production, setProduction] = useState(null)
   const toggleNavbar = () => {
     setNavVisible(!isNavVisible);
 };
@@ -42,6 +42,7 @@ const Home = () => {
   // }, [navigate]);
 
   // Fetch products and categories from the API when the component mounts
+  
   const fetchProducts = async () => {
     try {
       const response = await apiService.getProducts();
@@ -67,7 +68,6 @@ const Home = () => {
   
   useEffect(() => {
     fetchProducts();
-
     fetchCategories();
   }, []);
 
@@ -132,37 +132,37 @@ const Home = () => {
           </button>
           <h1 className="top-text"><i className="fas fa-home"></i>  Home</h1>
           </div>
-          <h1 className="top-text"><i className="fas fa-user" style={{ marginRight: '8px' }}/>{apiService.getUsername()}</h1>
+          <h1 className="top-text">Username</h1>
 
         </header>
         <div className="content">
           <div className="container d-flex justify-between mb-4">
-          <div className="card"style ={{width:"18rem"}}>
-            <div className="card-header">
-              Customer Orders
-            </div>
-            <div className='card-body'>
-              <p>customer name<span>---</span></p>
-              <p>Customer name<span>---</span></p>
-              <p>Customer name<span>----</span></p>
-              <div className="d-flex">
-                <button className="btn btn-primary w-auto">Manage</button>
+           <div className="card" style={{ width: "18rem" }}>
+              <div className="card-header">
+                <h4>Customer Orders</h4>
+              </div>
+              <div className='card-body'>
+                <p>customer name<span>---</span></p>
+                <p>Customer name<span>---</span></p>
+                <p>Customer name<span>----</span></p>
+                <div className="d-flex">
+                  <button className="btn btn-primary w-auto">Manage</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="card" style ={{width:"18rem"}}>
-            <div className="card-header">
-              Last Production
-            </div>
-            <div className='card-body'>
-              <p>Product:<span>---</span></p>
-              <p>quantity:<span>---</span></p>
-              <p>date:<span>----</span></p>
-              <div className="d-flex">
-                <button className="btn btn-warning w-auto">view</button>
+            <div className="card" style={{ width: "18rem" }}>
+              <div className="card-header d-flex">
+                <h4><i class="fas fa-industry"></i>&nbsp; Last Production</h4>
+              </div>
+              <div className='card-body'>
+                <p>Product:&nbsp;<span>--</span></p>
+                <p>quantity:&nbsp;<span>--</span></p>
+                <p>date:&nbsp;&nbsp;&nbsp;&nbsp;<span>--</span></p>
+                <div className="d-flex">
+                  <button className="btn btn-warning w-auto">view</button>
+                </div>
               </div>
             </div>
-          </div>
           
           <div className="card" style ={{width:"18rem"}}>
             <div className="card-header">
@@ -195,21 +195,25 @@ const Home = () => {
                   <th>Category</th>
                   <th>Stock</th>
                   <th>Price</th>
+                  <th>Actions</th>
+                  <th>Configuration</th>
                 </tr>
               </thead>
               <tbody>
                 {inventory.map((item) => (
                   <tr key={item.id}>
-                    <td>
-          <i className="fas fa-shopping-cart" style={{ marginRight: '8px' }}></i> {/* Product logo */}
-          {item.name}
-        </td>
+                    <td>{item.name}</td>
                     <td>{item.category ? item.category.name : 'N/A'}</td>
-                    <td>Ksh {item.price ? item.price.toFixed(2) : 'N/A'}</td>
+                    <td>{item.quantity} <button className="update_button" onClick={() => toggleProduceModal(item.id)}>Produce</button></td>
+                    <td>${item.price ? item.price.toFixed(2) : 'N/A'}</td>
                     <td>
                       <button className="delete_button mr-3" onClick={() => deleteInventoryItem(item.id)}>Delete</button>
                     </td>
-                    
+                    <td>
+                      <button className="add-button" onClick={() => selectProduct(item.id)}>
+                        Configuration
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

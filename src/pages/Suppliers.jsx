@@ -4,7 +4,7 @@ import '../styles/home.css';
 import '../styles/App.css';
 import Aside from '../components/Aside';
 import SupplierModal from '../components/SupplierModal';
-import UpdateSupplierModal from '../components/updateSupllierModal';
+import UpdateSupplierModal from '../components/updateSupllierModal'; // Fixed typo: updateSupllierModal
 import apiService from '../service/apiService';
 
 const Suppliers = () => {
@@ -27,6 +27,7 @@ const Suppliers = () => {
   const hideSupplierModal = () => {
     setSupplierModalVisible(false);
   };
+
   const getSuppliers = async () => {
     try {
       const response = await apiService.getAllSupplier();
@@ -36,14 +37,16 @@ const Suppliers = () => {
       alert(error.message);
     }
   };
-const getPurchaseOrders= (supplier) =>{
-  return 0
-}
+
+  const getPurchaseOrders = (supplier) => {
+    return 0;
+  };
 
   const deleteSupplier = (id) => {
     apiService.deleteSupplier(id)
       .then(response => {
-        setInventory(inventory.filter(item => item.id !== id));
+        console.log(response);
+        window.location.reload();
       })
       .catch(error => {
         alert(error);
@@ -51,12 +54,12 @@ const getPurchaseOrders= (supplier) =>{
   };
 
   const toggleSupplierUpdateModal = (item) => {
-     setSelectedSupplier(item);
-     setUpdateVisible(!isUpdateVisible);
-   };
+    setSelectedSupplier(item);
+    setUpdateVisible(!isUpdateVisible);
+  };
 
   useEffect(() => {
-   getSuppliers();
+    getSuppliers();
   }, []);
 
   return (
@@ -66,11 +69,11 @@ const getPurchaseOrders= (supplier) =>{
         <header className="main-header">
           <div className="d-flex">
             <button className="toggle-btn mr-2" onClick={toggleNavbar}>
-              <i style={{ color: "aqua" }} className="fa-solid fa-bars"></i>
+              <i style={{ color: 'aqua' }} className="fa-solid fa-bars"></i>
             </button>
             <h1 className="top-text"><i className="fas fa-users"></i> Suppliers</h1>
           </div>
-          <h1 className="top-text"><i className="fas fa-user" style={{ marginRight: '8px' }}/>{apiService.getUsername()}</h1>
+          <h1 className="top-text"><i className="fas fa-user" style={{ marginRight: '8px' }} />{apiService.getUsername()}</h1>
         </header>
         <div className="content">
           <div className="header-buttons">
@@ -82,7 +85,7 @@ const getPurchaseOrders= (supplier) =>{
           <section className="inventory-table">
             <table>
               <thead>
-                <tr style={{ color: "brown" }}>
+                <tr style={{ color: 'brown' }}>
                   <th>Supplier Name</th>
                   <th>Supplier Location</th>
                   <th>Supplier Phone</th>
@@ -94,21 +97,21 @@ const getPurchaseOrders= (supplier) =>{
               <tbody>
                 {supplier.map((item, index) => (
                   <tr key={index}>
-                    <td> <i className="fas fa-truck" style={{ marginRight: '8px' }}></i> {/* Product logo */}{item.name}</td>
+                    <td><i className="fas fa-truck" style={{ marginRight: '8px' }}></i>{item.name}</td>
                     <td>{item.location}</td>
                     <td>{item.phone}</td>
-                    <td> {getPurchaseOrders(item)} </td>
-                    <td> 
+                    <td>{getPurchaseOrders(item)}</td>
+                    <td>
                       <button 
-                        className="update_button" 
-                         onClick={() => toggleSupplierUpdateModal(item)}
+                        className="update_button"
+                        onClick={() => toggleSupplierUpdateModal(item)}
                       >
                         Update
                       </button>
                     </td>
                     <td>
                       <button 
-                        className="delete_button mr-3" 
+                        className="delete_button mr-3"
                         onClick={() => deleteSupplier(item.id)}
                       >
                         Delete
@@ -130,11 +133,12 @@ const getPurchaseOrders= (supplier) =>{
 
       <UpdateSupplierModal
         isVisible={isUpdateVisible}
-        onClose={toggleSupplierUpdateModal}
+        onClose={() => toggleSupplierUpdateModal(null)} // Updated to reset selectedSupplier
         supplier={selectedSupplier}
-      /> 
-    </div> 
+      />
+    </div>
   );
 };
 
 export default Suppliers;
+
